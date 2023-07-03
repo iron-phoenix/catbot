@@ -15,7 +15,7 @@ const (
 	catapiTokenHeader = "x-api-key"
 )
 
-func GetCatImageAdress(catAPIToken string) (string, error) {
+func GetCatImageURL(catAPIToken string) (string, error) {
 	req, err := http.NewRequest(http.MethodGet, requestAPI, nil)
 	if err != nil {
 		return "", errors.New("Can't create request")

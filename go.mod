@@ -1,3 +1,3 @@
-module github.com/iron-phoenix/catbot
+module catbot
 
 go 1.19
