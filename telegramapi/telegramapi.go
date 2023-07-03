@@ -27,8 +27,9 @@ type Update struct {
 const (
 	telegralBotAPIURL = "https://api.telegram.org/bot"
 
-	SendMessageMethod = "sendMessage"
-	SendPhotoMethod   = "sendPhoto"
+	SendMessageMethod   = "sendMessage"
+	SendAnimationMethod = "sendAnimation"
+	SendPhotoMethod     = "sendPhoto"
 )
 
 type DataGetter interface {
