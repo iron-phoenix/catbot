@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"os"
 	"strings"
+	"unicode"
 )
 
 var catVocabulary = map[string]bool{
@@ -19,6 +20,7 @@ var catVocabulary = map[string]bool{
 	"котя":        true,
 	"котю":        true,
 	"коти":        true,
+	"коть":        true,
 	"котов":       true,
 	"котейка":     true,
 	"котейку":     true,
@@ -49,15 +51,27 @@ var catVocabulary = map[string]bool{
 	"котей":       true,
 	"котеи":       true,
 	"котея":       true,
+	"котее":       true,
 	"котею":       true,
 	"котофей":     true,
 	"котофея":     true,
 	"котофею":     true,
+	"котофее":     true,
 	"котофеи":     true,
 	"котофейка":   true,
 	"котофейку":   true,
 	"котофейке":   true,
 	"котофейки":   true,
+	"котёнок":     true,
+	"котёнка":     true,
+	"котёнку":     true,
+	"котёнке":     true,
+	"котёнки":     true,
+	"котёночек":   true,
+	"котёночка":   true,
+	"котёночку":   true,
+	"котёночке":   true,
+	"котёночки":   true,
 }
 
 type TheCatAPIDataGetter struct{}
@@ -73,7 +87,11 @@ func (*TheCatAPIDataGetter) GetData(msg string) (string, string, error) {
 }
 
 func CatInText(text string) bool {
-	for _, word := range strings.Fields(text) {
+	splitFunc := func(c rune) bool {
+		return !unicode.IsLetter(c)
+	}
+
+	for _, word := range strings.FieldsFunc(text, splitFunc) {
 		if catVocabulary[strings.ToLower(word)] {
 			return true
 		}
